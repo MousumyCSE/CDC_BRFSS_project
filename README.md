@@ -1,16 +1,15 @@
 # CDC_BRFSS_project
 
-Introduction: 
-
-Background:
-    
-
-Files in the Repository:
-
-README.md – documentation file
-
-
-Data Preprocessing Steps
+table of content(optional)
+introduction
+figures
+preprocessing steps
+Model
+results
+discussion
+conclusions
+future work:
+statement of collaboration:
 
 
 
