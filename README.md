@@ -6,8 +6,8 @@ Background:
     
 
 Files in the Repository:
-•	
-•	README.md – documentation file
+
+README.md – documentation file
 
 
 Data Preprocessing Steps
