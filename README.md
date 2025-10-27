@@ -9,7 +9,7 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 **Data Exploration**
 1. How many observations does your dataset have?
-
+![Data_distribution_by_Class](visualizations/data_shape.png)
 *Our dataest has 2,763,102 rows and 27 columns.*
 
 2. Describe all columns in your dataset their scales and data distributions. Describe the categorical and continuous variables in your dataset. Describe your target column and if you are using images plot some example classes of the images.
@@ -47,6 +47,9 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 3. Do you have missing and duplicate values in your dataset? Note: For image data you can still describe your data by the number of classes, size of images, are sizes uniform? Do they need to be cropped? normalized? etc.
 
 *Our dataset has a few columns that are entirely one value.*
+![Data_distribution_by_Class](visualizations/Missing_value_code.png)
+
+![Data_distribution_by_Class](visualizations/Missing_value_report.png)
 
 *`DataSource` has only 'BRFSS'*
 
@@ -58,6 +61,8 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 `Data_Value_Footnote` and `Data_Value_Footnote_Symbol` has around 80% missing values. `Confidence_limits` columns has aroud 20% missing values and `Response` and   `Geolocation` has less than 1% missing values.
 
+Out dataset does not have any duplicated rows.
+
 **Data Plots**
 
 1. Plot your data with various types of charts like bar charts, pie charts, scatter plots etc. and clearly explain the plots. For image data, you will need to plot your example classes.
@@ -67,7 +72,11 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
    (ii) ![distribution_survey_responses](visualizations/distribution_survey_responses.jpg)
 
+   Interpretation: The pie chart displays the top five survey responses, showing that “No” (≈50%) and “Yes” (≈48%) dominate the distribution, while “Not told they have arthritis,” “Good or Better Health,” and “Married” each contribute less than 2% of the total responses.
+
    (iii) ![confidence_limit_scatter_plot](visualizations/confidence_limit_scatter_plot.jpg)
+
+   Interpretation: The scatter plot shows a strong positive relationship between the lower and upper confidence limits, with points closely following an upward trend. This indicates that as the lower limit increases, the upper limit also increases proportionally, and all upper limits remain above their corresponding lower limits, as expected.
 
    (iv) ![data_disribution_cancer](visualizations/data_disribution_cancer.jpg)
 
@@ -75,10 +84,20 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
    (vi) ![top10_states_avg_health](visualizations/top10_states_avg_health.jpg)
 
+   Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.
+
+
+
+
+**How will you preprocess your data? Handle data imbalance if needed**
 
 **Data Preprocessing**
-- Removing null values
+- Handle missing values through imputation or removal.
 - Dropping unnecessary columns
+- Encode categorical variables using label or one-hot encoding.
+- Scale numerical features if needed.
+- Address class imbalance using resampling, class weighting or using any balancing algorithms suhch as SMOTE, ADASYN.
+- Select relevant features to improve model performance.
   
 **Future work**
 Model predictions, clustering
