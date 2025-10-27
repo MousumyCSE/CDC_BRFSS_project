@@ -1,7 +1,7 @@
 # Center for Disease Control and Prevention, Behavioral Risk Factor Surveillance System
 ## DSE 203 - Machine Learning
 ## Milestone 2 - Data Exploration and Initial Preprocessing
-## Dataset link - https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
+#### Dataset link - https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
 
 **Environment Setup Requirements**
 
@@ -26,10 +26,10 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 | Break_Out | Demographic category value | Categorical | Loosely ordinal | idk distribution |
 | Break_Out_Category | Demographic category value | Categorical | Nominal | idk distribution |
 | Sample_Size | Size of demographic in Break_Out_Category and Break_Out | Continuous | idk scale | idk distribution |
-| Data_value | Percentage of Break_Out_Category and Break_Out make up total | Continuous | 1 - 100 | idk distribution |
-| Confidence_limit_Low | Low Confidence Limit | Continous | idk scale | idk distribution |
-| Confidence_limit_High | High Confidence Limit | Continous | idk scale | idk distribution |
-| Display_order | Display order | Continous | idk scale | idk distribution |
+| Data_value | Percentage of Break_Out_Category and Break_Out make up total | Continuous | 0 - 100 | Mean value is 40.45% with a median of 28.6%. 50% of the data is less than 28.6 |
+| Confidence_limit_Low | Low Confidence Limit | Continous | 0 - 100 | Mean value is 37.10 with a median of 23.8. 50% of data less than 68.9 |
+| Confidence_limit_High | High Confidence Limit | Continous | 0 - 100 | Mean value is 43.8 with a median of  33.3. 50% of the data is less than 33.3 |
+| Display_order | Display order | Continous | 1 - 4493 | idk distribution |
 | Data_value_unit | Unit for Data_value_type | Categorical | Nominal | All values are '%' |
 | Data_value_type | Data value type, such as age-adjusted prevalence or crude prevalence | Categorical | Nominal | All values are 'crude prevalence' |
 | 16  Data_Value_Footnote_Symbol | Symbol denoting footnote | Categorical | Nominal | distribution |
@@ -56,10 +56,14 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 *`Data_value_type` has only 'Crude Prevalence'.*
 
+`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` has around 80% missing values. `Confidence_limits` columns has aroud 20% missing values and `Response` and   `Geolocation` has less than 1% missing values.
+
 **Data Plots**
 
 1. Plot your data with various types of charts like bar charts, pie charts, scatter plots etc. and clearly explain the plots. For image data, you will need to plot your example classes.
-2. How will you preprocess your data? Handle data imbalance if needed. 
+   
+
+3. How will you preprocess your data? Handle data imbalance if needed. 
 
 
 
