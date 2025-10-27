@@ -14,35 +14,36 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 2. Describe all columns in your dataset their scales and data distributions. Describe the categorical and continuous variables in your dataset. Describe your target column and if you are using images plot some example classes of the images.
 
+*The target column we aim to utilize for our clustering analysis is **Responses**. Since we have data around demographic information like age, gender, race/ethnicity, and income, we want to group populations and predict their responses to survey questions.*
 | Column | Description | Categorical or Continuous | Scale | Distribution |
 | --- | --- | --- | --- | --- |
-| Year | Year of survey response | Continuous  | 2011 - 2023 | idk distribution |
-| Locattionabbr | State abbreviation | Categorical | Nominal | idk distribution |
-| Locationdesc | Full state name | Categorical | Nominal | idk distribution |
-| Class | Class description for area of health | Categorical | Nominal | idk distribution |
-| Topic | Subclass, specific area of interest | Categorical | Nominal | idk distribution |
-| Question | Question in survey | Categorical | Nominal | idk distribution |
-| Response | Response in survey | Categorical | Nominal | idk distribution |
-| Break_Out | Demographic category value | Categorical | Loosely ordinal | idk distribution |
-| Break_Out_Category | Demographic category value | Categorical | Nominal | idk distribution |
-| Sample_Size | Size of demographic in Break_Out_Category and Break_Out | Continuous | idk scale | idk distribution |
+| Year | Year of survey response | Continuous  | 2011 - 2023 | Mostly evenly distributed |
+| Locattionabbr | State abbreviation | Categorical | Nominal | Moslty evenly distributed except 'VI', 'UW', 'US' |
+| Locationdesc | Full state name | Categorical | Nominal | Mostly evenly distributed except 'Virgin Islands', 'All states and DC' |
+| Class | Class description for area of health | Categorical | Nominal | Almost half the data in 'Demographics', nearly 20% in 'Chronic Health Indicators' |
+| Topic | Subclass, specific area of interest | Categorical | Nominal | Highest count from 'Disability status' of 176,818 and lowest count from 'Had CAT/CT Chest Scan' |
+| Question | Question in survey | Categorical | Nominal | Highest count from 'Employment status?' of 140,716 and lowest count from 'Age 50-80 + former smoker + had CAT/CT scan in past year' of 2704 |
+| Response | Response in survey | Categorical | Nominal | 43% of values are either 'Yes' or 'No' |
+| Break_Out | Demographic category value like 'Male', '18-25' | Categorical | Loosely ordinal | Mostly evenly distributed except for unusual age group categories (46-55 and 45-54 are separate) |
+| Break_Out_Category | Demographic category like 'Sex', 'Age' | Categorical | Nominal | 6 possible values, highest count in 'Race/Ethnicity' of 768,868, lowest count in 'Overall' of 116,860 |
+| Sample_Size | Size of demographic in Break_Out_Category and Break_Out | Continuous | 0 - 37,492 | Mean is 639.16, 50% is 163 |
 | Data_value | Percentage of Break_Out_Category and Break_Out make up total | Continuous | 0 - 100 | Mean value is 40.45% with a median of 28.6%. 50% of the data is less than 28.6 |
 | Confidence_limit_Low | Low Confidence Limit | Continous | 0 - 100 | Mean value is 37.10 with a median of 23.8. 50% of data less than 68.9 |
 | Confidence_limit_High | High Confidence Limit | Continous | 0 - 100 | Mean value is 43.8 with a median of  33.3. 50% of the data is less than 33.3 |
-| Display_order | Display order | Continous | 1 - 4493 | idk distribution |
+| Display_order | Display order | Continous | 1 - 4,493 | Nearly half of all values are 1 |
 | Data_value_unit | Unit for Data_value_type | Categorical | Nominal | All values are '%' |
 | Data_value_type | Data value type, such as age-adjusted prevalence or crude prevalence | Categorical | Nominal | All values are 'crude prevalence' |
-| 16  Data_Value_Footnote_Symbol | Symbol denoting footnote | Categorical | Nominal | distribution |
-| Data_Value_Footnote | Footnote text | Categorical | Nominal | Mostly 'No responses for this data cell' |
+| 16  Data_Value_Footnote_Symbol | Symbol denoting footnote | Categorical | Nominal | 3 possible values: *, **, *** |
+| Data_Value_Footnote | Footnote text | Categorical | Nominal | 4 possible values, most frequently about prevalence estimate |
 | DataSource | Survey name | Categorical | Nominal | All values are 'BRFSS' |
-| ClassId | Class ID | Categorical | Nominal | distribution |
-| TopicId | Topic ID | Categorical | Nominal | distribution |
-| LocationID | Location ID | Categorical | Nominal | distribution |
-| BreakoutID | Breakout ID | Categorical | Nominal | distribution |
-| BreakOutCategoryID | Breakout Category ID | Categorical | Nominal | distribution |
-| QuestionID | Question ID | Categorical | Nominal | distribution |
-| ResponseID | Response ID | Categorical | Nominal | distribution |
-| GeoLocation | Latitude and longitude of state | Numeric | idk scale | idk distribution |
+| ClassId | Class ID | Categorical | Nominal | Similar distribution as Class |
+| TopicId | Topic ID | Categorical | Nominal | Similar distribution as Topic |
+| LocationID | Location ID | Categorical | Nominal | Similar distribution as Location |
+| BreakoutID | Breakout ID | Categorical | Nominal | Similar distribution as Break_Out |
+| BreakOutCategoryID | Breakout Category ID | Categorical | Nominal | Similar distribution as Break_Out_Category |
+| QuestionID | Question ID | Categorical | Nominal | Similar distribution as Question |
+| ResponseID | Response ID | Categorical | Nominal | Similar distribution as Response |
+| GeoLocation | Latitude and longitude of state | Numeric | Arrays of states' latitude and longitude | 105 possible values |
 
 3. Do you have missing and duplicate values in your dataset? Note: For image data you can still describe your data by the number of classes, size of images, are sizes uniform? Do they need to be cropped? normalized? etc.
 
