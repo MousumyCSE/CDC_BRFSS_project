@@ -89,9 +89,7 @@ Out dataset does not have any duplicated rows.
 
 
 
-**How will you preprocess your data? Handle data imbalance if needed**
-
-**Data Preprocessing**
+**How will you preprocess your data? Handle data imbalance if needed.**
 - Handle missing values through imputation or removal.
 - Dropping unnecessary columns
 - Encode categorical variables using label or one-hot encoding.
