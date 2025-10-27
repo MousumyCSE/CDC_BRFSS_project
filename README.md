@@ -87,7 +87,7 @@ Out dataset does not have any duplicated rows.
 
    (v) ![filtered_cancer_ds](visualizations/filtered_cancer_ds.jpg)
    
-   Interpretation: This choropleth map visualizes data filtered for Colorectal Cancer Screening — specifically, the Blood Stool Test for adults aged 50–75 who reported having the test within the past year for the year 2014 to 2020.
+   Interpretation: This choropleth map visualizes data filtered for Colorectal Cancer Screening — specifically, the Blood Stool Test for adults aged 50–75 who reported having the test within their past year for the year 2016.
 
    (vi) ![top10_states_avg_health](visualizations/top10_states_avg_health.jpg)
 
