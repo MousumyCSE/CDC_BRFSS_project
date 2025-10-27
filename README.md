@@ -70,6 +70,8 @@ Out dataset does not have any duplicated rows.
    
    (i) Total data distributions between classes
     ![Data_distribution_by_Class](visualizations/Data_distribution_by_Class.jpg)
+   
+   Interpretation: This bar chart illustrates the total number of survey responses across different health classes, such as Women’s Health, Obesity, Cancer, Oral Health, Immunization, etc. The highest number of responses comes from the Demographics category, which covers topics like disability status, education, and employment. In contrast, the fewest responses are observed for Lung Cancer Screening.
 
    (ii) ![distribution_survey_responses](visualizations/distribution_survey_responses.jpg)
 
@@ -80,8 +82,12 @@ Out dataset does not have any duplicated rows.
    Interpretation: The scatter plot shows a strong positive relationship between the lower and upper confidence limits, with points closely following an upward trend. This indicates that as the lower limit increases, the upper limit also increases proportionally, and all upper limits remain above their corresponding lower limits, as expected.
 
    (iv) ![data_disribution_cancer](visualizations/data_disribution_cancer.jpg)
+   
+   Interpretation: After filtering the dataset to include only cancer-related topics, we found that Colorectal Cancer Screening accounts for the majority of survey results, whereas Lung Cancer Screening has the least representation based on race/ethnicity over the years.
 
    (v) ![filtered_cancer_ds](visualizations/filtered_cancer_ds.jpg)
+   
+   Interpretation: This choropleth map visualizes data filtered for Colorectal Cancer Screening — specifically, the Blood Stool Test for adults aged 50–75 who reported having the test within the past year for the year 2014 to 2020.
 
    (vi) ![top10_states_avg_health](visualizations/top10_states_avg_health.jpg)
 
@@ -99,10 +105,12 @@ Out dataset does not have any duplicated rows.
 - Select relevant features to improve model performance.
   
 **Future work**
-Model predictions, clustering
+Model predictions and clustering
 
 **Statement of collaboration**
-
+Mousumy Kundu
+Aditi Das
+Hayley Baek
 
 
 
