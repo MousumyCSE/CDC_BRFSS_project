@@ -62,22 +62,29 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 1. Plot your data with various types of charts like bar charts, pie charts, scatter plots etc. and clearly explain the plots. For image data, you will need to plot your example classes.
    
+   (i) Total data distributions between classes
+    ![Data_distribution_by_Class](visualizations/Data_distribution_by_Class.jpg)
 
-3. How will you preprocess your data? Handle data imbalance if needed. 
+   (ii) ![distribution_survey_responses](visualizations/distribution_survey_responses.jpg)
+
+   (iii) ![confidence_limit_scatter_plot](visualizations/confidence_limit_scatter_plot.jpg)
+
+   (iv) ![data_disribution_cancer](visualizations/data_disribution_cancer.jpg)
+
+   (v) ![filtered_cancer_ds](visualizations/filtered_cancer_ds.jpg)
+
+   (vi) ![top10_states_avg_health](visualizations/top10_states_avg_health.jpg)
 
 
+**Data Preprocessing**
+- Removing null values
+- Dropping unnecessary columns
+  
+**Future work**
+Model predictions, clustering
 
+**Statement of collaboration**
 
-table of content(optional)
-introduction
-figures
-preprocessing steps
-Model
-results
-discussion
-conclusions
-future work:
-statement of collaboration:
 
 
 
