@@ -1,8 +1,13 @@
 # Center for Disease Control and Prevention, Behavioral Risk Factor Surveillance System
 ## DSE 203 - Machine Learning
 ## Milestone 2 - Data Exploration and Initial Preprocessing
-#### Dataset link - https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
+**Dataset link**
+* https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
 
+**Jupter Notebook links**
+* https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/ML_project.ipynb
+*  https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/CDC_BRFSS_MilestoneII.ipynb
+  
 **Environment Setup Requirements**
 
 This Jupyter Notebook is self-contained and can be run in most environments that support Jupyter Notebooks like Visual Studio Code or Google Colab.
@@ -24,7 +29,7 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 | Topic | Subclass, specific area of interest | Categorical | Nominal | Highest count from 'Disability status' of 176,818 and lowest count from 'Had CAT/CT Chest Scan' |
 | Question | Question in survey | Categorical | Nominal | Highest count from 'Employment status?' of 140,716 and lowest count from 'Age 50-80 + former smoker + had CAT/CT scan in past year' of 2704 |
 | Response | Response in survey | Categorical | Nominal | 43% of values are either 'Yes' or 'No' |
-| Break_Out | Demographic category value like 'Male', '18-25' | Categorical | Loosely ordinal | Mostly evenly distributed except for unusual age group categories (46-55 and 45-54 are separate) |
+| Break_Out | Demographic category value like 'Male', '18-25' | Categorical | Nominal | Mostly evenly distributed except for unusual age group categories (46-55 and 45-54 are separate) |
 | Break_Out_Category | Demographic category like 'Sex', 'Age' | Categorical | Nominal | 6 possible values, highest count in 'Race/Ethnicity' of 768,868, lowest count in 'Overall' of 116,860 |
 | Sample_Size | Size of demographic in Break_Out_Category and Break_Out | Continuous | 0 - 37,492 | Mean is 639.16, 50% is 163 |
 | Data_value | Percentage of Break_Out_Category and Break_Out make up total | Continuous | 0 - 100 | Mean value is 40.45% with a median of 28.6%. 50% of the data is less than 28.6 |
@@ -105,11 +110,15 @@ Out dataset does not have any duplicated rows.
 - Select relevant features to improve model performance.
   
 **Future work**
+
 Model predictions and clustering
 
 **Statement of collaboration**
+
 Mousumy Kundu
+
 Aditi Das
+
 Hayley Baek
 
 
