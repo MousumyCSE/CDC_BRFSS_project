@@ -98,50 +98,55 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
    *Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.*
 
+## Milestone 3
 ### Pre-processing
-Finish major preprocessing, this includes scaling and/or transforming your data, imputing your data, encoding your data, feature expansion, Feature expansion (example is taking features and generating new features by transforming via polynomial, log multiplication of features).
-
 **Dropping columns**
+![](visualizations/data_prreprocessing.png)
+Response is our target for evaluation, not a feature for clustering. *`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
 
-*`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
+**Numeric vs Categorical Features**
+![](visualizations/num_cat_features.png)
+*Since clustering algorithms require numeric inputs, the features are separated between numeric and categorical to apply the appropriate further preprocessing steps: scaling for numeric features and encoding for categorical features. For our dataset the numeric features are declared as `Data_value`, `Sample_Size`, `Confidence_limit_Low`, `Confidence_limit_High` and the other features are categorical.*
 
 **Missing Value Handling**
 
+![](visualizations/handling_missing_values.png)
 *Any missing numeric values are replaced with the median, and any missing categorical values are replaced with the most frequently present value.*
 
-**Numeric vs Categorical Features**
-
-*Since clustering algorithms require numeric inputs, the features are separated between numeric and categorical to apply the appropriate further preprocessing steps: scaling for numeric features and encoding for categorical features. For our dataset the numeric features are declared as `Data_value`, `Sample_Size`, `Confidence_limit_Low`, `Confidence_limit_High` and the other features are categorical.*
 
 **Scale Numeric Features**
 
+![](visualizations/scaling.png)
 *K-Means uses Euclidean distance, so features must be on the same scale which prevents numeric features with larger ranges from dominating the clustering.*
 
 **Encode Categorical Features**
-
+![](visualizations/encoding.png)
 *K-Means works on numeric data only. Here we are using One-hot encoding which converts categorical features (like `Locationdesc` or `Class`) into binary columns. This ensures all categorical variables can be used in clustering.*
 
 **Feature Transformation and Expansion**
-
+![](visualizations/feature_transfornmation.png)
 *Log-transform reduces skewness in `Sample_Size`. Polynomial features create interaction terms and squared features which allows K-Means to detect more complex patterns.*
 
 ### First Model
-Train your first model and analyze your model's performance. Evaluate your model and compare training vs. test error.
+## K-Means Clustering
+We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters.
 
-*We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters. The target variable for our dataset is `Response`. The `Response` column has hundreds of unique values, plotting all would be messy. We keep the 10 most frequent responses and group the rest as "Other" to simplify analysis and visualization.*
+![](visualizations/k_means_model.png)
 
-**insert image here**
+*The target variable for our dataset is `Response`. The `Response` column has hundreds of unique values, plotting all would be messy. We keep the 10 most frequent responses and group the rest as "Other" to simplify analysis and visualization.*
+
+![](visualizations/cluster.png)
 
 *Interpretation: After applying K-Means clustering with 5 clusters, we examined the distribution of survey responses within each cluster. Cluster 0 represents the largest segment, containing a majority of "Other", "Yes", and "No" responses, indicating a diverse population with mixed responses. Cluster 2 also captures a large group but has a higher proportion of "No" responses, suggesting a population segment less likely to respond positively. Clusters 1, 3, and 4 are smaller and contain niche populations or outliers, with "No" dominating but with fewer overall responses.*
 
 *These results indicate that K-Means successfully separates populations by general response patterns, with larger clusters representing the main population and smaller clusters highlighting specialized groups. This separation can help guide further analysis, targeting, or interventions based on demographic and survey features.*
 
 **Model Evaluation**
+![](visualizations/interia_Silhouette_score.png)
 
 *To evaluate cluster quality, we calculated the silhouette score on a random sample of 10,000 rows due to the dataset's size. The sampled silhouette score is 0.384, indicating that clusters are moderately well-separated. This aligns with the cluster distributions, where larger clusters capture the majority of responses and smaller clusters represent specialized or less frequent patterns. The score suggests that while clusters are meaningful, there is some overlap among populations, which is expected in survey data with diverse response.*
 
-### Answer the questions
-Where does your model fit in the fitting graph? (Build at least one model with different hyperparameters and check for over/underfitting, pick the best model). What are the next models you are thinking of and why?
+### Where does your model fit in the fitting graph?
 
 **Model Fit**
 
@@ -151,7 +156,8 @@ Where does your model fit in the fitting graph? (Build at least one model with d
 
 **Test of Different Hyperparamters**
 
-*Testing with k=3 and k=7*
+*We can compare different numbers of clusters, e.g., k=3 and k=7:*
+![](visualizations/hyperparameter_tuning.png)
 
 *Interpretation: We tested K-Means with k = 3, 5, and 7 to analyze model fit. The silhouette score was highest for k=3 (0.415), indicating the best separation between clusters. While increasing k reduces inertia (cluster compactness), the silhouette score dropped at k=5 (0.381) and significantly at k=7 (0.146), showing that higher k values begin to overfit by creating overly fragmented clusters with poor separation. Therefore, k=3 provides the best balance between underfitting and overfitting and represents the optimal clustering configuration for this dataset.*
 
