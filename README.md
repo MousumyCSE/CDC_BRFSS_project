@@ -65,9 +65,9 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 *`Data_value_type` has only 'Crude Prevalence'.*
 
-`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` has around 80% missing values. `Confidence_limits` columns has aroud 20% missing values and `Response` and   `Geolocation` has less than 1% missing values.
+*`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` has around 80% missing values. `Confidence_limits` columns has aroud 20% missing values and `Response` and   `Geolocation` has less than 1% missing values.*
 
-Out dataset does not have any duplicated rows.
+*Out dataset does not have any duplicated rows.*
 
 ### Data Plots
 
@@ -76,46 +76,93 @@ Out dataset does not have any duplicated rows.
    (i) Total data distributions between classes
     ![Data_distribution_by_Class](visualizations/Data_distribution_by_Class.jpg)
    
-   Interpretation: This bar chart illustrates the total number of survey responses across different health classes, such as Women’s Health, Obesity, Cancer, Oral Health, Immunization, etc. The highest number of responses comes from the Demographics category, which covers topics like disability status, education, and employment. In contrast, the fewest responses are observed for Lung Cancer Screening.
+   *Interpretation: This bar chart illustrates the total number of survey responses across different health classes, such as Women’s Health, Obesity, Cancer, Oral Health, Immunization, etc. The highest number of responses comes from the Demographics category, which covers topics like disability status, education, and employment. In contrast, the fewest responses are observed for Lung Cancer Screening.*
 
    (ii) ![distribution_survey_responses](visualizations/distribution_survey_responses.jpg)
 
-   Interpretation: The pie chart displays the top five survey responses, showing that “No” (≈50%) and “Yes” (≈48%) dominate the distribution, while “Not told they have arthritis,” “Good or Better Health,” and “Married” each contribute less than 2% of the total responses.
+   *Interpretation: The pie chart displays the top five survey responses, showing that “No” (≈50%) and “Yes” (≈48%) dominate the distribution, while “Not told they have arthritis,” “Good or Better Health,” and “Married” each contribute less than 2% of the total responses.*
 
    (iii) ![confidence_limit_scatter_plot](visualizations/confidence_limit_scatter_plot.jpg)
 
-   Interpretation: The scatter plot shows a strong positive relationship between the lower and upper confidence limits, with points closely following an upward trend. This indicates that as the lower limit increases, the upper limit also increases proportionally, and all upper limits remain above their corresponding lower limits, as expected.
+   *Interpretation: The scatter plot shows a strong positive relationship between the lower and upper confidence limits, with points closely following an upward trend. This indicates that as the lower limit increases, the upper limit also increases proportionally, and all upper limits remain above their corresponding lower limits, as expected.*
 
    (iv) ![data_disribution_cancer](visualizations/data_disribution_cancer.jpg)
    
-   Interpretation: After filtering the dataset to include only cancer-related topics, we found that Colorectal Cancer Screening accounts for the majority of survey results, whereas Lung Cancer Screening has the least representation based on race/ethnicity over the years.
+   *Interpretation: After filtering the dataset to include only cancer-related topics, we found that Colorectal Cancer Screening accounts for the majority of survey results, whereas Lung Cancer Screening has the least representation based on race/ethnicity over the years.*
 
    (v) ![filtered_cancer_ds](visualizations/filtered_cancer_ds.jpg)
    
-   Interpretation: This choropleth map visualizes data filtered for Colorectal Cancer Screening — specifically, the Blood Stool Test for adults aged 50–75 who reported having the test within their past year for the year 2016.
+   *Interpretation: This choropleth map visualizes data filtered for Colorectal Cancer Screening — specifically, the Blood Stool Test for adults aged 50–75 who reported having the test within their past year for the year 2016.*
 
    (vi) ![top10_states_avg_health](visualizations/top10_states_avg_health.jpg)
 
-   Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.
+   *Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.*
 
 ### Pre-processing
 Finish major preprocessing, this includes scaling and/or transforming your data, imputing your data, encoding your data, feature expansion, Feature expansion (example is taking features and generating new features by transforming via polynomial, log multiplication of features).
 
-**How will you preprocess your data? Handle data imbalance if needed.**
-- Handle missing values through imputation or removal.
-- Dropping unnecessary columns
-- Encode categorical variables using label or one-hot encoding.
-- Scale numerical features if needed.
-- Address class imbalance using resampling, class weighting or using any balancing algorithms suhch as SMOTE, ADASYN.
-- Select relevant features to improve model performance.
-- 
+**Dropping columns**
+
+*`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
+
+**Missing Value Handling**
+
+*Any missing numeric values are replaced with the median, and any missing categorical values are replaced with the most frequently present value.*
+
+**Numeric vs Categorical Features**
+
+*Since clustering algorithms require numeric inputs, the features are separated between numeric and categorical to apply the appropriate further preprocessing steps: scaling for numeric features and encoding for categorical features. For our dataset the numeric features are declared as `Data_value`, `Sample_Size`, `Confidence_limit_Low`, `Confidence_limit_High` and the other features are categorical.*
+
+**Scale Numeric Features**
+
+*K-Means uses Euclidean distance, so features must be on the same scale which prevents numeric features with larger ranges from dominating the clustering.*
+
+**Encode Categorical Features**
+
+*K-Means works on numeric data only. Here we are using One-hot encoding which converts categorical features (like `Locationdesc` or `Class`) into binary columns. This ensures all categorical variables can be used in clustering.*
+
+**Feature Transformation and Expansion**
+
+*Log-transform reduces skewness in `Sample_Size`. Polynomial features create interaction terms and squared features which allows K-Means to detect more complex patterns.*
+
 ### First Model
 Train your first model and analyze your model's performance. Evaluate your model and compare training vs. test error.
 
-3: Answer the questions: Where does your model fit in the fitting graph? (Build at least one model with different hyperparameters and check for over/underfitting, pick the best model). What are the next models you are thinking of and why?
+*We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters. The target variable for our dataset is `Response`. The `Response` column has hundreds of unique values, plotting all would be messy. We keep the 10 most frequent responses and group the rest as "Other" to simplify analysis and visualization.*
+
+**insert image here**
+
+*Interpretation: After applying K-Means clustering with 5 clusters, we examined the distribution of survey responses within each cluster. Cluster 0 represents the largest segment, containing a majority of "Other", "Yes", and "No" responses, indicating a diverse population with mixed responses. Cluster 2 also captures a large group but has a higher proportion of "No" responses, suggesting a population segment less likely to respond positively. Clusters 1, 3, and 4 are smaller and contain niche populations or outliers, with "No" dominating but with fewer overall responses.*
+
+*These results indicate that K-Means successfully separates populations by general response patterns, with larger clusters representing the main population and smaller clusters highlighting specialized groups. This separation can help guide further analysis, targeting, or interventions based on demographic and survey features.*
+
+**Model Evaluation**
+
+*To evaluate cluster quality, we calculated the silhouette score on a random sample of 10,000 rows due to the dataset's size. The sampled silhouette score is 0.384, indicating that clusters are moderately well-separated. This aligns with the cluster distributions, where larger clusters capture the majority of responses and smaller clusters represent specialized or less frequent patterns. The score suggests that while clusters are meaningful, there is some overlap among populations, which is expected in survey data with diverse response.*
+
+### Answer the questions
+Where does your model fit in the fitting graph? (Build at least one model with different hyperparameters and check for over/underfitting, pick the best model). What are the next models you are thinking of and why?
+
+**Model Fit**
+
+*We trained K-Means with 5 clusters. Using the Elbow Method (plotting inertia vs. number of clusters), we chose k=5 where inertia starts to flatten, indicating that additional clusters do not significantly reduce intra-cluster distances. The sampled silhouette score of 0.384 shows moderate cluster separation, suggesting the model captures meaningful patterns without overfitting the dataset.*
+
+*In terms of underfitting vs overfitting, underfitting would result in to few clusters → high inertia, low silhouette score. Overfitting would result in oo many clusters → very low inertia, but clusters may be meaningless (splitting natural groups unnecessarily). k=5 is a balance, representing main population segments without over-segmenting.*
+
+**Test of Different Hyperparamters**
+
+*Testing with k=3 and k=7*
+
+*Interpretation: We tested K-Means with k = 3, 5, and 7 to analyze model fit. The silhouette score was highest for k=3 (0.415), indicating the best separation between clusters. While increasing k reduces inertia (cluster compactness), the silhouette score dropped at k=5 (0.381) and significantly at k=7 (0.146), showing that higher k values begin to overfit by creating overly fragmented clusters with poor separation. Therefore, k=3 provides the best balance between underfitting and overfitting and represents the optimal clustering configuration for this dataset.*
+
+**Next Model**
+
+*To further improve clustering performance and gain deeper insights into the data structure, several alternative models can be explored beyond K-Means. Hierarchical Clustering is a strong next candidate because it does not require pre-specifying the number of clusters and provides dendrogram visualizations that reveal natural groupings within the dataset, making it useful for exploratory analysis. DBSCAN is another promising approach as it is density-based and can detect clusters of arbitrary shapes while effectively identifying outliers as noise—something K-Means cannot handle well. Additionally, Gaussian Mixture Models (GMM) offer a probabilistic perspective by providing the likelihood of each point belonging to different clusters. Unlike K-Means, which assumes spherical clusters with equal variance, GMM can model elliptical clusters and overlapping groups more effectively. Exploring these methods is valuable because real-world survey data rarely conforms to the strict assumptions of K-Means; using more flexible models can better capture complex patterns, noise, and variability in the dataset.*
 
 ### Conclusion
-What is the conclusion of your 1st model? What can be done to possibly improve it? (5 points)
+What is the conclusion of your 1st model? What can be done to possibly improve it?
+
+*The first model used for clustering was K-Means with five clusters, applied after completing data preprocessing. The model produced a silhouette score of approximately 0.38, indicating a moderate level of cluster separation. This suggests that the model was able to identify meaningful patterns and group individuals with similar demographic and response behaviors, although some overlap between clusters still exists. The inertia score further supported that the clusters created were reasonably compact. Analysis of the cluster distribution showed that one cluster contained a large portion of the data, while the remaining clusters represented smaller, more specific population groups, indicating that the dataset is somewhat imbalanced and certain response patterns dominate. Overall, K-Means served as a solid initial model for uncovering structure within the data; however, there is room for improvement. Model performance could likely be enhanced by experimenting with different values of k, trying alternative clustering techniques such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models, and applying dimensionality reduction methods like PCA or t-SNE prior to clustering to better separate patterns in high-dimensional space. Additionally, addressing category imbalance or applying soft clustering may yield more refined and interpretable clusters.*
   
 ### Future work
 
