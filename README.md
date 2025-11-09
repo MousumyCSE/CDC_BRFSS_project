@@ -1,18 +1,18 @@
 # Center for Disease Control and Prevention, Behavioral Risk Factor Surveillance System
 ## DSE 203 - Machine Learning
-## Milestone 2 - Data Exploration and Initial Preprocessing
-**Dataset link**
+## Milestone 3 - Pre-Processing and First Model
+### Dataset link
 * https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
 
-**Jupter Notebook links**
+### Jupter Notebook links
 * https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/ML_project.ipynb
 *  https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/CDC_BRFSS_MilestoneII.ipynb
   
-**Environment Setup Requirements**
+### Environment Setup Requirements
 
 This Jupyter Notebook is self-contained and can be run in most environments that support Jupyter Notebooks like Visual Studio Code or Google Colab.
 
-**Data Exploration**
+### Data Exploration
 1. How many observations does your dataset have?
 ![Data_distribution_by_Class](visualizations/data_shape.png)
 *Our dataest has 2,763,102 rows and 27 columns.*
@@ -69,7 +69,7 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
 Out dataset does not have any duplicated rows.
 
-**Data Plots**
+### Data Plots
 
 1. Plot your data with various types of charts like bar charts, pie charts, scatter plots etc. and clearly explain the plots. For image data, you will need to plot your example classes.
    
@@ -98,8 +98,8 @@ Out dataset does not have any duplicated rows.
 
    Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.
 
-
-
+### Pre-processing
+Finish major preprocessing, this includes scaling and/or transforming your data, imputing your data, encoding your data, feature expansion, Feature expansion (example is taking features and generating new features by transforming via polynomial, log multiplication of features).
 
 **How will you preprocess your data? Handle data imbalance if needed.**
 - Handle missing values through imputation or removal.
@@ -108,12 +108,20 @@ Out dataset does not have any duplicated rows.
 - Scale numerical features if needed.
 - Address class imbalance using resampling, class weighting or using any balancing algorithms suhch as SMOTE, ADASYN.
 - Select relevant features to improve model performance.
+- 
+### First Model
+Train your first model and analyze your model's performance. Evaluate your model and compare training vs. test error.
+
+3: Answer the questions: Where does your model fit in the fitting graph? (Build at least one model with different hyperparameters and check for over/underfitting, pick the best model). What are the next models you are thinking of and why?
+
+### Conclusion
+What is the conclusion of your 1st model? What can be done to possibly improve it? (5 points)
   
-**Future work**
+### Future work
 
-Model predictions and clustering
+Second model and final report
 
-**Statement of collaboration**
+### Statement of collaboration
 
 Mousumy Kundu
 
