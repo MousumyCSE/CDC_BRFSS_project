@@ -5,12 +5,11 @@
 * https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
 
 ### Jupter Notebook links
-* https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/ML_project.ipynb
-*  https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/CDC_BRFSS_MilestoneII.ipynb
+* https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone3/ML_project.ipynb
   
 ### Environment Setup Requirements
 
-This Jupyter Notebook is self-contained and can be run in most environments that support Jupyter Notebooks like Visual Studio Code or Google Colab.
+*This Jupyter Notebook is self-contained and can be run in most environments that support Jupyter Notebooks like Visual Studio Code or Google Colab.*
 
 ### Data Exploration
 1. How many observations does your dataset have?
@@ -102,7 +101,7 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 ### Pre-processing
 **Dropping columns**
 ![](visualizations/data_prreprocessing.png)
-Response is our target for evaluation, not a feature for clustering. *`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
+*Response is our target for evaluation, not a feature for clustering. `Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
 
 **Numeric vs Categorical Features**
 ![](visualizations/num_cat_features.png)
@@ -129,7 +128,7 @@ Response is our target for evaluation, not a feature for clustering. *`Data_Valu
 
 ### First Model
 ## K-Means Clustering
-We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters.
+*We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters.*
 
 ![](visualizations/k_means_model.png)
 
