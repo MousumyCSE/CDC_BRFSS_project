@@ -165,22 +165,64 @@ We're applying k-means clustering which partitions the data based on feature sim
 
 *To further improve clustering performance and gain deeper insights into the data structure, several alternative models can be explored beyond K-Means. Hierarchical Clustering is a strong next candidate because it does not require pre-specifying the number of clusters and provides dendrogram visualizations that reveal natural groupings within the dataset, making it useful for exploratory analysis. DBSCAN is another promising approach as it is density-based and can detect clusters of arbitrary shapes while effectively identifying outliers as noise—something K-Means cannot handle well. Additionally, Gaussian Mixture Models (GMM) offer a probabilistic perspective by providing the likelihood of each point belonging to different clusters. Unlike K-Means, which assumes spherical clusters with equal variance, GMM can model elliptical clusters and overlapping groups more effectively. Exploring these methods is valuable because real-world survey data rarely conforms to the strict assumptions of K-Means; using more flexible models can better capture complex patterns, noise, and variability in the dataset.*
 
-### Conclusion
+### Conclusion for 1st model
 What is the conclusion of your 1st model? What can be done to possibly improve it?
 
 *The first model used for clustering was K-Means with five clusters, applied after completing data preprocessing. The model produced a silhouette score of approximately 0.38, indicating a moderate level of cluster separation. This suggests that the model was able to identify meaningful patterns and group individuals with similar demographic and response behaviors, although some overlap between clusters still exists. The inertia score further supported that the clusters created were reasonably compact. Analysis of the cluster distribution showed that one cluster contained a large portion of the data, while the remaining clusters represented smaller, more specific population groups, indicating that the dataset is somewhat imbalanced and certain response patterns dominate. Overall, K-Means served as a solid initial model for uncovering structure within the data; however, there is room for improvement. Model performance could likely be enhanced by experimenting with different values of k, trying alternative clustering techniques such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models, and applying dimensionality reduction methods like PCA or t-SNE prior to clustering to better separate patterns in high-dimensional space. Additionally, addressing category imbalance or applying soft clustering may yield more refined and interpretable clusters.*
   
-### Future work
+## Milestone 3
+**Training with second model**
 
-Second model and final report
+*For the second model, we selected a PCA (Principal Component Analysis) + K-Means pipeline.
+We are applying PCA because the BRFSS dataset is high-dimensional, noisy, and contains highly correlated variables. By transforming data into uncorrelated components that capture maximum variance, PCA reduces dimensionality, removes noise, and preserves important patterns. This will make clustering more effective, as algorithms like K-Means perform better in lower-dimensional spaces.*
+![](visualizations/2nd_model.png)
+![](visualizations/Silhouette_score.png)
+*Here, we compute the silhouette score on a random sample (10,000 rows) instead of the entire dataset because the full silhouette calculation is extremely expensive for large datasets. Silhouette scoring has a computational complexity of O(n²), making it too slow to run on millions of data points. Using a representative sample provides an accurate estimate of clustering quality while keeping computation fast and efficient, without affecting the validity of the evaluation.*
+
+*Interpretation: After applying PCA with 95% variance retention, the dataset was reduced from 994 original features to 82 principal components, significantly simplifying the data while preserving most of the meaningful structure. Running K-Means on these PCA-compressed features produced a silhouette score of 0.443 (sampled), which is noticeably higher than the score from the original K-Means model without PCA. This indicates that PCA helped remove noise and redundant information, allowing K-Means to form more compact and well-separated clusters. Overall, PCA improved clustering performance, reduced dimensionality, and increased model stability while greatly lowering computational cost, making it a more effective second model compared to raw K-Means.*
+
+**Silhouette Score Analysis for Determining Optimal k**
+![](visualizations/optimal_k.png)
+![](visualizations/output_optimal_k.png)
+
+*Interpretation: We evaluated clustering quality using the silhouette score computed on a random sample of 10,000 rows (sampling is used because silhouette scoring is O(n²) and infeasible on the full 2.7M-row dataset). The results show very high scores for k = 2 (0.83) and k = 3 (0.79), indicating strong natural cluster separation. After k = 4 the silhouette score drops significantly, showing that higher k values lead to overfitting. Therefore, the model fits best with 2–3 clusters.*
+
+**Evaluation of model and compare training vs. test error**
+
+*As we are using unsupervised learning (PCA + K-Means), there is no true “training vs. test error” the way supervised models have.
+However, we can still evaluate the model using an equivalent approach.
+Even in unsupervised learning, we can simulate the idea of "training vs. test error" by splitting the data, training PCA+KMeans on one part, and checking cluster quality on the other.*
+
+![](visualizations/compare_train_test.png)
+
+*Interpretation: After applying PCA, the dataset was reduced from 994 features to 413 principal components, retaining 95% of the variance. K-Means clustering on the PCA-transformed data produced negative silhouette scores of -0.015 for the training set and -0.013 for the test set, indicating that many points are closer to points in other clusters than to their own. The similar train and test scores show that the model is not overfitting, but the clustering itself is poorly defined, suggesting underfitting. This is likely due to the high dimensionality, the presence of heterogeneous survey responses, and K-Means’ assumption of spherical clusters. To improve clustering, alternative methods such as DBSCAN or Hierarchical Clustering could be explored, along with further dimensionality reduction, non-negative matrix factorization, or alternative encodings for categorical features to better capture the structure of the data.*
+
+**Model fitting in the fitting graph and What are the next models you are thinking of and why?**
+
+*Based on the sampled silhouette scores, the PCA + K-Means model shows similar low scores for both training and test sets, indicating that it is underfitting; the clusters are not well-separated and the model does not capture clear structure in the data. This suggests that K-Means on PCA-transformed survey responses is not fully effective for this dataset. For the next models, alternative clustering approaches such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models (GMMs) could be considered. Hierarchical Clustering allows visualization of natural groupings and does not require specifying k upfront. DBSCAN can detect arbitrarily shaped clusters and handles outliers as noise, while GMM provides probabilistic cluster assignments and can capture elliptical cluster shapes, which may better represent the heterogeneity of survey response data. These methods could improve cluster separation and provide more meaningful groupings than K-Means.*
+
+**Conclusion of the 2nd model? What can be done to possibly improve it?**
+
+*The second model applied PCA to reduce the dimensionality of the dataset from 994 features to 413 principal components, retaining 95% of the variance, followed by K-Means clustering. Evaluation using sampled silhouette scores showed low values for both the training (-0.015) and test (-0.013) sets, indicating that the clusters are poorly separated and the model is underfitting. The similarity between training and test scores suggests that the model generalizes consistently but fails to capture meaningful structure in the survey response data. To potentially improve clustering performance, alternative approaches such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models (GMMs) could be applied. These methods can handle non-spherical clusters, noise, or probabilistic assignments, which may better reflect the heterogeneity of survey responses. Further improvements may also come from reducing PCA dimensions more aggressively, exploring non-negative matrix factorization, or using alternative encodings for categorical features to enhance cluster separation and interpretability.*
+
+**Predictions of correct and FP and FN from your test dataset**
+
+![](visualizations/prediction.png)
+
+*Interpretation: The evaluation of the PCA + K-Means clusters against the original Response column shows that the clusters capture some of the survey responses but with many misclassifications. For example, Cluster 4 has the highest number of correct predictions (107,916) and relatively lower false negatives (15,398), indicating it aligns reasonably well with its majority response. In contrast, Clusters 1 and 0 have many false negatives and false positives, showing that the predicted cluster does not correspond well to the original responses. Overall, while some clusters capture common responses, the high number of FP and FN across other clusters highlights the limitations of K-Means for this heterogeneous survey data. This suggests that alternative clustering approaches, such as DBSCAN, Hierarchical Clustering, or Gaussian Mixture Models, may better capture the complex structure of the responses and reduce misclassification.*
+
+**Conclusion**
+
+*In this project, we analyzed CDC BRFSS survey data to explore patterns in population responses using unsupervised learning. The first model applied K-Means directly to the preprocessed dataset, producing clusters with some alignment to common survey responses, but with moderate silhouette scores and many responses grouped as "Other." The second model incorporated dimensionality reduction using PCA before K-Means clustering, reducing the features from 994 to 413 while retaining 95% of variance. While PCA improved computational efficiency, the sampled silhouette scores remained low and negative, indicating underfitting and poorly separated clusters. Evaluation against the original Response column showed that some clusters captured frequent responses reasonably well, but many clusters had high false positives and false negatives, highlighting the limitations of K-Means for heterogeneous survey responses. Overall, while K-Means provides a baseline clustering, the analysis suggests that alternative clustering approaches—such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models—may better capture the complex structure of the data, handle non-spherical clusters, and reduce misclassification. Future work could also explore alternative encodings, feature transformations, or non-negative matrix factorization to enhance clustering performance and interpretability.*
 
 ### Statement of collaboration
 
-Mousumy Kundu
+| Name          | Role          | Contribution                                       |
+|---------------|---------------|---------------------------------------------------|
+| Mousumy Kundu     | Coder/Writer  | Contributed in visualization, data modeling, and documentation |
+| Aditi Das| Coder/Writer  | Contributed in visualization, data modeling, and documentation |
+| Hayley Baek   | Coder/Writer  | Contributed in visualization, data modeling, and documentation |
 
-Aditi Das
-
-Hayley Baek
 
 
 
