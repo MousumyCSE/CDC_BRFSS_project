@@ -1,16 +1,18 @@
 # Center for Disease Control and Prevention, Behavioral Risk Factor Surveillance System
-## DSE 203 - Machine Learning
-## Milestone 3 - Pre-Processing and First Model
+# DSE 203 - Machine Learning
+# Milestone 4 - Second Model and Final Report
 ### Dataset link
 * https://data.cdc.gov/Behavioral-Risk-Factors/Behavioral-Risk-Factor-Surveillance-System-BRFSS-P/dttw-5yxu
 
 ### Jupter Notebook links
-* https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/ML_project.ipynb
-*  https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone2/CDC_BRFSS_MilestoneII.ipynb
+* https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone4/ML_project.ipynb
+*  https://github.com/MousumyCSE/CDC_BRFSS_project/blob/Milestone4/MilestoneIV_part2.ipynb
   
 ### Environment Setup Requirements
 
 This Jupyter Notebook is self-contained and can be run in most environments that support Jupyter Notebooks like Visual Studio Code or Google Colab.
+
+## Milestone 2 - Data Exploration & Initial Preprocessing
 
 ### Data Exploration
 1. How many observations does your dataset have?
@@ -98,11 +100,11 @@ This Jupyter Notebook is self-contained and can be run in most environments that
 
    *Interpretation: The bar plot showing the top 10 states by average health behavior rate. Each bar represents a state or territory, with the height indicating its mean Data_value (in percentage). The plot highlights that the U.S. Virgin Islands (VI) has the highest average, followed by Guam (GU) and Washington, D.C. (DC), while the other states like Delaware (DE), Wisconsin (WI), and Vermont (VT) have slightly lower but similar averages. Overall, it visually ranks these locations by their health behavior performance.*
 
-## Milestone 3
+## Milestone 3 - Pre-Processing and First Model
 ### Pre-processing
 **Dropping columns**
 ![](visualizations/data_prreprocessing.png)
-Response is our target for evaluation, not a feature for clustering. *`Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
+*`Response` is our target for evaluation, not a feature for clustering. `Data_Value_Footnote` and `Data_Value_Footnote_Symbol` are dropped because these are mostly empty and not useful for clustering analysis.*
 
 **Numeric vs Categorical Features**
 ![](visualizations/num_cat_features.png)
@@ -129,7 +131,7 @@ Response is our target for evaluation, not a feature for clustering. *`Data_Valu
 
 ### First Model
 ## K-Means Clustering
-We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters.
+*We're applying k-means clustering which partitions the data based on feature similarities. Groups of similar observations are formed into k clusters.*
 
 ![](visualizations/k_means_model.png)
 
@@ -170,7 +172,7 @@ What is the conclusion of your 1st model? What can be done to possibly improve i
 
 *The first model used for clustering was K-Means with five clusters, applied after completing data preprocessing. The model produced a silhouette score of approximately 0.38, indicating a moderate level of cluster separation. This suggests that the model was able to identify meaningful patterns and group individuals with similar demographic and response behaviors, although some overlap between clusters still exists. The inertia score further supported that the clusters created were reasonably compact. Analysis of the cluster distribution showed that one cluster contained a large portion of the data, while the remaining clusters represented smaller, more specific population groups, indicating that the dataset is somewhat imbalanced and certain response patterns dominate. Overall, K-Means served as a solid initial model for uncovering structure within the data; however, there is room for improvement. Model performance could likely be enhanced by experimenting with different values of k, trying alternative clustering techniques such as Hierarchical Clustering, DBSCAN, or Gaussian Mixture Models, and applying dimensionality reduction methods like PCA or t-SNE prior to clustering to better separate patterns in high-dimensional space. Additionally, addressing category imbalance or applying soft clustering may yield more refined and interpretable clusters.*
   
-## Milestone 3
+## Milestone 4 - Second Model (and Final Report)
 **Training with second model**
 
 *For the second model, we selected a PCA (Principal Component Analysis) + K-Means pipeline.
